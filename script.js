@@ -67,7 +67,7 @@ let qty = 0;
     fetch(SHEETS_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({ ime, tel, adresa, napomena, qty })
     })
     .then(() => {
