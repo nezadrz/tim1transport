@@ -1,6 +1,8 @@
 let qty = 0;
   let inCart = false;
 
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyVK9GEUq0etSOf_Y_qgCZ8KL96HjSDfFQrAwL2PAB9yQQdP2PXMCKKmfrGXphpK6J1Ug/exec';
+
   function changeQty(delta) {
     qty = Math.max(0, qty + delta);
     document.getElementById('qty-display').textContent = qty;
@@ -56,8 +58,29 @@ let qty = 0;
     if (!tel) { alert('Bitte Telefonnummer eingeben.'); return; }
     if (!adresa) { alert('Bitte Lieferadresse eingeben.'); return; }
     if (!inCart || qty === 0) { alert('Warenkorb ist leer. Bitte Produkt hinzufügen.'); return; }
-    const box = document.getElementById('success-box');
-    document.getElementById('success-text').innerHTML = '<strong>Bestellung eingegangen!</strong><br>Vielen Dank, <strong>' + ime + '</strong>! Ihre Bestellung wurde erfolgreich erfasst.<br>Lieferung an: <strong>' + adresa + '</strong><br>Kontakt: <strong>' + tel + '</strong><br><br>Bestellt: <strong>Toilettenpapier und Papierhandtücher — ' + qty + ' Palette(n)</strong>';
-    box.classList.add('visible');
-    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = 'Wird gesendet...';
+    btn.disabled = true;
+
+    fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ime, tel, adresa, qty })
+    })
+    .then(() => {
+      const box = document.getElementById('success-box');
+      document.getElementById('success-text').innerHTML =
+        '<strong>Bestellung eingegangen!</strong><br>Vielen Dank, <strong>' + ime + '</strong>! Ihre Bestellung wurde erfolgreich erfasst.<br>Lieferung an: <strong>' + adresa + '</strong><br>Kontakt: <strong>' + tel + '</strong><br><br>Bestellt: <strong>Toilettenpapier und Papierhandtücher — ' + qty + ' Palette(n)</strong>';
+      box.classList.add('visible');
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      btn.textContent = 'Bestellung aufgeben';
+      btn.disabled = false;
+    })
+    .catch(() => {
+      alert('Fehler beim Senden. Bitte versuchen Sie es erneut.');
+      btn.textContent = 'Bestellung aufgeben';
+      btn.disabled = false;
+    });
   }

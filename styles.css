@@ -1,379 +1,637 @@
+/* ===========================
+   CSS VARIJABLE
+   =========================== */
 :root {
-      --cream: #F5F0E8;
-      --dark: #1A1A18;
-      --mid: #3D3D38;
-      --muted: #8A8A80;
-      --accent: #2D6A4F;
-      --accent-light: #E8F2EC;
-      --accent-mid: #52B788;
-      --border: #DDD8CC;
-      --white: #FFFFFF;
-      --danger: #C0392B;
-      --danger-light: #FDECEA;
-    }
+  --cream: #F5F0E8;
+  --dark: #1A1A18;
+  --mid: #3D3D38;
+  --muted: #8A8A80;
+  --accent: #2D6A4F;
+  --accent-light: #E8F2EC;
+  --accent-mid: #52B788;
+  --border: #DDD8CC;
+  --white: #FFFFFF;
+  --danger: #C0392B;
+  --danger-light: #FDECEA;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ===========================
+   RESET & BASE
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--dark);
-      min-height: 100vh;
-    }
+html {
+  /* Sprečava zoom na iOS pri fokusu na input */
+  -webkit-text-size-adjust: 100%;
+}
 
-    nav {
-      background: var(--dark);
-      height: 60px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  min-height: 100vh;
+  /* Bolji scrolling na mobilnim */
+  -webkit-overflow-scrolling: touch;
+}
 
-    .hero {
-      background: var(--dark);
-      color: var(--cream);
-      padding: 3rem 2rem;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 240px;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(82,183,136,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
+/* ===========================
+   NAVIGACIJA
+   =========================== */
+nav {
+  background: var(--dark);
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    .hero-logo {
-      position: absolute;
-      right: 2.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 160px;
-      height: 160px;
-      object-fit: contain;
-    }
+/* ===========================
+   HERO SEKCIJA
+   =========================== */
+.hero {
+  background: var(--dark);
+  color: var(--cream);
+  padding: 2.5rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
 
-    .hero-logo-left {
-      position: absolute;
-      left: 2.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 160px;
-      height: 160px;
-      object-fit: contain;
-    }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 120%, rgba(82,183,136,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-    .hero-content {
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+.hero-logo {
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
 
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent-mid);
-      margin-bottom: 1rem;
-    }
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--accent-mid);
-      opacity: 0.6;
-    }
+.hero-logo-left {
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
 
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-      color: var(--cream);
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent-mid);
-    }
-    .hero p {
-      font-size: 15px;
-      color: rgba(245,240,232,0.6);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  /* Prostor da logoi ne prekrivaju tekst */
+  padding: 0 170px;
+}
 
-    .main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 2rem;
-      align-items: start;
-    }
-    @media (max-width: 720px) {
-      .main { grid-template-columns: 1fr; }
-      .hero-logo { width: 100px; height: 100px; right: 1rem; }
-    }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-mid);
+  margin-bottom: 0.75rem;
+}
 
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--accent-mid);
+  opacity: 0.6;
+}
 
-    .product-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      margin-bottom: 0;
-    }
-    .product-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .product-icon-box {
-      width: 56px;
-      height: 56px;
-      background: var(--accent-light);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-    .product-meta { flex: 1; }
-    .product-name {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 4px;
-    }
-    .product-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .product-badge {
-      display: inline-block;
-      background: var(--accent-light);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-top: 8px;
-    }
-    .product-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-    }
-    .qty-wrap {
-      display: flex;
-      align-items: center;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .qty-btn {
-      width: 36px;
-      height: 36px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      color: var(--mid);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s;
-    }
-    .qty-btn:hover { background: var(--border); }
-    .qty-num {
-      font-size: 15px;
-      font-weight: 600;
-      min-width: 32px;
-      text-align: center;
-      color: var(--dark);
-    }
-    .add-btn {
-      flex: 1;
-      height: 36px;
-      background: var(--dark);
-      color: var(--cream);
-      border: none;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .add-btn:hover { background: var(--mid); }
-    .add-btn:active { transform: scale(0.97); }
-    .add-btn.added {
-      background: var(--accent);
-      color: #fff;
-    }
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+  color: var(--cream);
+}
 
-    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent-mid);
+}
 
-    .cart-box {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .cart-header {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .cart-title { font-size: 14px; font-weight: 600; color: var(--dark); }
-    .cart-count {
-      background: var(--dark);
-      color: var(--cream);
-      font-size: 11px;
-      font-weight: 700;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .cart-body { padding: 1.25rem 1.5rem; }
-    .cart-empty-msg { font-size: 13px; color: var(--muted); text-align: center; padding: 1.5rem 0; }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .cart-item:last-child { border-bottom: none; }
-    .cart-item-name { font-size: 14px; font-weight: 500; color: var(--dark); }
-    .cart-item-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .cart-remove {
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 16px;
-      padding: 4px 6px;
-      border-radius: 6px;
-      transition: color 0.15s, background 0.15s;
-    }
-    .cart-remove:hover { color: var(--danger); background: var(--danger-light); }
-    .cart-footer {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--dark);
-    }
+.hero p {
+  font-size: 14px;
+  color: rgba(245,240,232,0.6);
+  max-width: 360px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
 
-    .form-box {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-    }
-    .form-box .section-label { margin-bottom: 1.25rem; }
-    .field { margin-bottom: 1rem; }
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .field input {
-      width: 100%;
-      height: 42px;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--dark);
-      background: var(--cream);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .field input:focus { border-color: var(--accent); background: var(--white); }
-    .field input::placeholder { color: var(--muted); }
+/* ===========================
+   GLAVNI LAYOUT
+   =========================== */
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.75rem;
+  align-items: start;
+}
 
-    .submit-btn {
-      width: 100%;
-      height: 46px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      font-family: 'DM Sans', sans-serif;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .submit-btn:hover { background: #245A42; }
-    .submit-btn:active { transform: scale(0.98); }
+/* ===========================
+   LABELE SEKCIJA
+   =========================== */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.875rem;
+}
 
-    .success-box {
-      display: none;
-      background: var(--accent-light);
-      border: 1px solid var(--accent-mid);
-      border-radius: 16px;
-      padding: 1.5rem;
-      font-size: 14px;
-      color: var(--accent);
-      line-height: 1.7;
-    }
-    .success-box.visible { display: block; }
-    .success-box strong { font-weight: 600; }
-    .success-icon { font-size: 28px; margin-bottom: 0.75rem; display: block; }
+/* ===========================
+   KARTICA PROIZVODA
+   =========================== */
+.product-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
 
-    footer {
-      background: var(--dark);
-      color: rgba(245,240,232,0.4);
-      text-align: center;
-      font-size: 12px;
-      padding: 1.5rem;
-      letter-spacing: 0.04em;
-    }
+.product-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.product-icon-box {
+  width: 52px;
+  height: 52px;
+  background: var(--accent-light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.product-meta { flex: 1; min-width: 0; }
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.product-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.product-badge {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 8px;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 1.125rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ===========================
+   KONTROLA KOLIČINE
+   =========================== */
+.qty-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.qty-btn {
+  /* Veći touch target za prste */
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  /* Sprečava dupli tap zoom na iOS */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qty-btn:active { background: var(--border); }
+
+.qty-num {
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 36px;
+  text-align: center;
+  color: var(--dark);
+}
+
+.add-btn {
+  flex: 1;
+  height: 44px;
+  background: var(--dark);
+  color: var(--cream);
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, transform 0.1s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.add-btn:active { transform: scale(0.97); }
+
+.add-btn.added {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ===========================
+   SIDEBAR
+   =========================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ===========================
+   KORPA
+   =========================== */
+.cart-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cart-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.cart-count {
+  background: var(--dark);
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 700;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-body { padding: 1rem 1.25rem; }
+
+.cart-empty-msg {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  padding: 1.25rem 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item:last-child { border-bottom: none; }
+
+.cart-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.cart-item-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.cart-remove {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 18px;
+  /* Veći touch area */
+  padding: 8px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.cart-remove:active { color: var(--danger); background: var(--danger-light); }
+
+.cart-footer {
+  padding: 0.875rem 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+/* ===========================
+   FORMA ZA DOSTAVU
+   =========================== */
+.form-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.form-box .section-label { margin-bottom: 1rem; }
+
+.field { margin-bottom: 0.875rem; }
+
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.field input {
+  width: 100%;
+  /* Veća visina za lakši dodir */
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  /* font-size 16px sprečava auto-zoom na iOS */
+  font-size: 16px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field input:focus {
+  border-color: var(--accent);
+  background: var(--white);
+}
+
+.field input::placeholder { color: var(--muted); }
+
+.submit-btn {
+  width: 100%;
+  height: 52px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.1s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.submit-btn:active { transform: scale(0.98); }
+
+/* ===========================
+   PORUKA USPJEHA
+   =========================== */
+.success-box {
+  display: none;
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  border-radius: 16px;
+  padding: 1.25rem;
+  font-size: 14px;
+  color: var(--accent);
+  line-height: 1.7;
+}
+
+.success-box.visible { display: block; }
+.success-box strong { font-weight: 600; }
+
+.success-icon {
+  font-size: 28px;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+  background: var(--dark);
+  color: rgba(245,240,232,0.4);
+  text-align: center;
+  font-size: 12px;
+  padding: 1.25rem 1rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
+/* ===========================
+   TABLET (max 860px)
+   =========================== */
+@media (max-width: 860px) {
+  .hero-content {
+    padding: 0 130px;
+  }
+
+  .hero-logo,
+  .hero-logo-left {
+    width: 110px;
+    height: 110px;
+  }
+
+  .hero-logo { right: 1.25rem; }
+  .hero-logo-left { left: 1.25rem; }
+
+  .main {
+    grid-template-columns: 1fr 300px;
+    gap: 1.25rem;
+    padding: 1.5rem 1rem 3rem;
+  }
+}
+
+/* ===========================
+   MOBILNI (max 640px)
+   =========================== */
+@media (max-width: 640px) {
+  /* Hero – logoi idu gore, tekst ispod */
+  .hero {
+    flex-direction: column;
+    padding: 4.5rem 1rem 1.75rem;
+    min-height: auto;
+    gap: 0;
+  }
+
+  .hero-logo-left {
+    position: absolute;
+    left: 50%;
+    top: 0.75rem;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 72px;
+  }
+
+  /* Desni logo sakrijemo na mobilnom – duplikat */
+  .hero-logo {
+    display: none;
+  }
+
+  .hero-content {
+    padding: 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 1.55rem;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  /* Layout – jedna kolona */
+  .main {
+    grid-template-columns: 1fr;
+    padding: 1.25rem 0.875rem 3rem;
+    gap: 1.25rem;
+  }
+
+  /* Kartica proizvoda */
+  .product-card {
+    padding: 1.125rem;
+  }
+
+  /* Dugmad – puni red na uskim ekranima */
+  .product-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .qty-wrap {
+    flex: 0 0 auto;
+  }
+
+  .add-btn {
+    flex: 1 1 auto;
+    min-width: 140px;
+  }
+
+  /* Forma */
+  .form-box {
+    padding: 1.125rem;
+  }
+
+  /* Footer tekst – prelom na više redova */
+  footer {
+    font-size: 11px;
+  }
+}
+
+/* ===========================
+   MALI MOBILNI (max 380px)
+   =========================== */
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 1.35rem;
+  }
+
+  .main {
+    padding: 1rem 0.75rem 2.5rem;
+  }
+
+  .qty-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .field input {
+    height: 46px;
+  }
+
+  .submit-btn {
+    height: 50px;
+  }
+}
