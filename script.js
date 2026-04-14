@@ -54,6 +54,7 @@ let qty = 0;
     const ime = document.getElementById('f-ime').value.trim();
     const tel = document.getElementById('f-tel').value.trim();
     const adresa = document.getElementById('f-adresa').value.trim();
+    const napomena = document.getElementById('f-napomena').value.trim();
     if (!ime) { alert('Bitte Vor- und Nachname eingeben.'); return; }
     if (!tel) { alert('Bitte Telefonnummer eingeben.'); return; }
     if (!adresa) { alert('Bitte Lieferadresse eingeben.'); return; }
@@ -67,12 +68,14 @@ let qty = 0;
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ime, tel, adresa, qty })
+      body: JSON.stringify({ ime, tel, adresa, napomena, qty })
     })
     .then(() => {
       const box = document.getElementById('success-box');
       document.getElementById('success-text').innerHTML =
-        '<strong>Bestellung eingegangen!</strong><br>Vielen Dank, <strong>' + ime + '</strong>! Ihre Bestellung wurde erfolgreich erfasst.<br>Lieferung an: <strong>' + adresa + '</strong><br>Kontakt: <strong>' + tel + '</strong><br><br>Bestellt: <strong>Toilettenpapier und Papierhandtücher — ' + qty + ' Palette(n)</strong>';
+        '<strong>Bestellung eingegangen!</strong><br>Vielen Dank, <strong>' + ime + '</strong>! Ihre Bestellung wurde erfolgreich erfasst.<br>Lieferung an: <strong>' + adresa + '</strong><br>Kontakt: <strong>' + tel + '</strong>' +
+        (napomena ? '<br>Anmerkung: <strong>' + napomena + '</strong>' : '') +
+        '<br><br>Bestellt: <strong>Toilettenpapier und Papierhandtücher — ' + qty + ' Palette(n)</strong>';
       box.classList.add('visible');
       box.scrollIntoView({ behavior: 'smooth', block: 'start' });
       btn.textContent = 'Bestellung aufgeben';
